@@ -8,10 +8,10 @@ export function sortStrings(arr, param) {
   if (param === 'desc') {
     return arr
       .slice()
-      .sort((a, b) => {return b.localeCompare(a, ['en', 'ru'], {sensitivity: 'case', caseFirst: 'upper'});});
+      .sort((a, b) => {return b.localeCompare(a, ['ru', 'en'], {sensitivity: 'case', caseFirst: 'upper'});});
   } else {
     return arr
       .slice()
-      .sort((a, b) => {return a.localeCompare(b, ['en', 'ru'], {sensitivity: 'case', caseFirst: 'upper'});});
+      .sort((a, b) => {return a.localeCompare(b, ['ru', 'en'], {sensitivity: 'case', caseFirst: 'upper'});});
   }
 }
