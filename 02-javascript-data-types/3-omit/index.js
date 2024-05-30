@@ -4,6 +4,16 @@
  * @param {...string} fields - the properties paths to omit
  * @returns {object} - returns the new object
  */
+// export const omit = (obj, ...fields) => {
 export const omit = (obj, ...fields) => {
+  const result = {};
 
+  for (let key in obj) {
+    result[key] = obj[key];
+  }
+
+  fields.forEach(field => {
+    delete result[field];
+  });
+  return result;
 };
