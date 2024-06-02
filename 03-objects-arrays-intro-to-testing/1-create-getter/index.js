@@ -9,12 +9,17 @@ export function createGetter(propertyPath) {
 
   return (obj) => {
     let result = obj;
+
     for (const pathPart of pathParts) {
+      if (!result.hasOwnProperty(pathPart)) {
+        return;
+      }
+
       result = result[pathPart];
       if (result === undefined) {
-        return undefined;
+        return;
       }
     }
-    return typeof result === 'function' ? undefined : result;
+    return result;
   };
 }
