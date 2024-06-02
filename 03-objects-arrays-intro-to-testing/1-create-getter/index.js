@@ -14,11 +14,6 @@ export function createGetter(propertyPath) {
       if (!result.hasOwnProperty(pathPart)) {
         return;
       }
-
-      result = result[pathPart];
-      if (result === undefined) {
-        return;
-      }
     }
     return result;
   };
