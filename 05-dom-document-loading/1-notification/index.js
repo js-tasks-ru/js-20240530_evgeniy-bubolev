@@ -4,6 +4,7 @@ export default class NotificationMessage {
   message = '';
   duration = 0;
   type = '';
+  timerId = null;
 
   element;
 
@@ -24,7 +25,7 @@ export default class NotificationMessage {
 
   show(targetElement) {
     if (NotificationMessage.currentShownElement != null) {
-      NotificationMessage.currentShownElement.remove();
+      NotificationMessage.currentShownElement.close();
     }
 
     NotificationMessage.currentShownElement = this;
@@ -34,13 +35,21 @@ export default class NotificationMessage {
       targetElement.appendChild(this.element);
     }
 
-    setTimeout(() => this.remove(), this.duration);
+    this.timerId = setTimeout(() => this.close(), this.duration);
   }
 
   remove() {
-    NotificationMessage.currentShownElement = null;
-    this.element.remove();
+    if (this.element) {
+      this.element.remove();
+    }
   }
+
+  close() {
+    clearTimeout(this.timerId);
+    this.remove();
+    NotificationMessage.currentShownElement = null;
+  }
+
 
   createElement() {
     const element = document.createElement('div');
@@ -74,6 +83,6 @@ export default class NotificationMessage {
   }
 
   destroy() {
-    this.remove();
+    this.close();
   }
 }
